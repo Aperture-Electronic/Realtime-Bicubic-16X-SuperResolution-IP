@@ -10,10 +10,13 @@
 
 # Deprecated files
 *.deprecated
+rom.txt
+transcript
 
 # Folders
 vivado
 doc
 constrain
 ip
+modelsim/work
 
