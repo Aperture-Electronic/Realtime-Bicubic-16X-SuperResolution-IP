@@ -1,0 +1,454 @@
+// System verilog source file
+// Line buffer for Bicubic
+// Designer:    Deng LiWei
+// Date:        2022/04
+// Description: This line buffer can storage 4 lines of image 
+//    which uses by Bicubic algorithm
+//    This buffer has the function of cross clock-domain, 
+//    which allow different input and output clock frequency.
+//    In general conditions, the output clock is times of input clock.
+//    Input port of the line buffer can storage a single pixel per clock
+//    On the output port, the module using 4-line parallel output,
+//    can output 1xN pixels at same time.
+//    This line buffer include access FIFO counters, 5 SDPRAMs
+
+module bicubic_line_buffer
+#(
+    parameter INPUT_IMAGE_WIDTH  = 960,
+    parameter INPUT_IMAGE_HEIGHT = 540,
+    parameter PIXEL_WIDTH  = 8  
+)
+(
+    // Clock & reset
+    input logic clk,
+    input logic aresetn,
+    input logic bram_reset,
+    input logic clken,
+
+    // Input video pixel
+    input  logic [PIXEL_WIDTH - 1:0] pixel_in,
+    input  logic                     pixel_in_valid,
+    input  logic                     pixel_in_start_of_frame,
+    input  logic                     pixel_in_end_of_line,
+    output logic                     buffer_ready,
+
+    // Output control
+    input  logic pipeline_ready,
+    output logic pixel_out_valid,
+    output logic pixel_read_valid,
+
+    // Output pixel
+    output logic [PIXEL_WIDTH - 1:0] pixel_line0,
+    output logic [PIXEL_WIDTH - 1:0] pixel_line1,
+    output logic [PIXEL_WIDTH - 1:0] pixel_line2,
+    output logic [PIXEL_WIDTH - 1:0] pixel_line3
+);
+
+localparam PADDING_LINE = 2;
+localparam PADDING_LINE_CNT_WIDTH = $clog2(PADDING_LINE + 1);
+
+localparam BUFFER_LINE_CNT_WIDTH = $clog2(5);
+localparam REPEAT_LINE_CNT_WIDTH = $clog2(4);
+localparam BRAM_LATENCY = 1;
+
+localparam IMAGE_X_CNT_WIDTH  = $clog2(INPUT_IMAGE_WIDTH);
+localparam IMAGE_Y_CNT_WIDTH  = $clog2(INPUT_IMAGE_HEIGHT);
+localparam LINE_MEMORY_SIZE   = INPUT_IMAGE_WIDTH * PIXEL_WIDTH;
+
+localparam SUPER_BLOCK_HEIGHT = INPUT_IMAGE_HEIGHT + 1;
+localparam SUBLK_Y_REG_WIDTH  = $clog2(SUPER_BLOCK_HEIGHT);
+
+localparam SUBLK_Y_ENTER_INTERVAL = SUPER_BLOCK_HEIGHT - 2;
+
+// Input pixel counter
+logic [IMAGE_X_CNT_WIDTH - 1:0] in_x_reg;
+
+// Output pixel counter
+logic [IMAGE_X_CNT_WIDTH - 1:0]     out_x_reg;
+// This counter count the output line repeat
+// all lines need to repeat 4 times
+logic [REPEAT_LINE_CNT_WIDTH - 1:0] out_repeat_reg; 
+
+// Padding line counter
+logic [PADDING_LINE_CNT_WIDTH - 1:0] padding_line_reg;
+
+// Pixel output valid
+logic pixel_out_valid_reg;
+
+// Pixel read valid
+logic pixel_read_valid_reg;
+
+// In interval
+logic buffer_in_interval;
+logic allow_interval_count;
+
+// Signals from input pixel counter
+logic in_x_last_column;
+logic out_x_last_column;
+logic out_line_last_repeat;
+
+// Buffer control counter
+logic [4:0] buffer_active_reg; // Indicate which buffer is the first activate buffer
+logic [4:0] buffer_active_reg_pipe; // Pipeline register of activate register, for BRAM
+logic [4:0] buffer_wract_reg;  // Indicate which buffer is activate to write
+
+// Super-block counter
+logic [SUBLK_Y_REG_WIDTH - 1:0] sublk_y_reg;
+logic [SUBLK_Y_REG_WIDTH - 1:0] nxt_sublk_y_reg;
+logic [SUBLK_Y_REG_WIDTH - 1:0] out_sublk_y_reg;
+logic [SUBLK_Y_REG_WIDTH - 1:0] nxt_out_sublk_y_reg;
+
+// Signals from super-block counter
+logic sublk_last_row;
+logic sublk_enter_interval;
+logic out_sublk_last_row;
+logic out_sublk_out_of_range;
+
+// Signals
+logic allow_write_to_buffer;
+
+// Outputs from buffer
+logic [PIXEL_WIDTH - 1:0] buf_out_data     [0:4];   // Original output from buffers
+logic [PIXEL_WIDTH - 1:0] line_out_data    [0:3];   // Output form valid buffers
+
+// Output padding
+logic [3:0] out_padding_reg;
+logic [3:0] out_padding_reg_pipe;
+
+// Write activate 
+assign allow_write_to_buffer = pixel_in_valid & buffer_ready;
+
+// Signals from super-blocks
+assign sublk_last_row = (sublk_y_reg == SUPER_BLOCK_HEIGHT - 1);
+assign sublk_enter_interval = (sublk_y_reg == SUBLK_Y_ENTER_INTERVAL - 1);
+
+// Input super-block counter
+always_ff @(posedge clk, negedge aresetn) begin : IN_SUPER_BLK_CNT
+    if (!aresetn) begin
+        sublk_y_reg <= SUPER_BLOCK_HEIGHT - 2;
+    end
+    else if (clken) begin
+        if (allow_write_to_buffer) begin
+            if (in_x_last_column) begin
+                sublk_y_reg <= nxt_sublk_y_reg;
+            end
+        end
+    end
+end
+
+always_comb begin : NXT_SUPER_BLK_CNT
+    if (sublk_last_row) begin
+        nxt_sublk_y_reg = 'd0;
+    end
+    else if (sublk_y_reg == SUBLK_Y_ENTER_INTERVAL - 2) begin
+        nxt_sublk_y_reg = sublk_y_reg + 'd2;
+    end
+    else begin
+        nxt_sublk_y_reg = sublk_y_reg + 'd1;
+    end
+end
+
+// Input column counter
+assign in_x_last_column = (in_x_reg == INPUT_IMAGE_WIDTH - 1);
+
+always_ff @(posedge clk, negedge aresetn) begin
+    if (!aresetn) begin
+        in_x_reg <= 'b0;
+    end
+    else if (clken) begin
+        if (allow_write_to_buffer) begin
+            if (in_x_last_column || pixel_in_end_of_line) begin
+                in_x_reg <= 'b0;
+            end
+            else begin
+                in_x_reg <= in_x_reg + 'b1;
+            end
+        end
+    end
+end
+
+// Output counter
+assign out_x_last_column = (out_x_reg == INPUT_IMAGE_WIDTH - 1);
+assign out_line_last_repeat = (out_repeat_reg == 3);
+assign out_sublk_last_row = (out_sublk_y_reg == SUPER_BLOCK_HEIGHT - 1);
+
+always_comb begin : NXT_OUTPUT_SUBLK
+    if (out_sublk_last_row) begin
+        nxt_out_sublk_y_reg = 'd0;
+    end
+    else begin
+        nxt_out_sublk_y_reg = out_sublk_y_reg + 'b1;
+    end
+end
+
+always_ff @(posedge clk, negedge aresetn) begin : OUTPUT_CNT
+    if (!aresetn) begin
+        out_x_reg <= 'b0;
+        out_repeat_reg <= 'b0;
+    end
+    else if (clken && pipeline_ready) begin
+        if (out_x_last_column) begin
+            out_x_reg <= 'b0;
+            
+            // Repeat counter, a same line will output 4 times
+            if (out_line_last_repeat) begin
+                out_repeat_reg <= 'b0;
+            end
+            else begin
+                out_repeat_reg <= out_repeat_reg + 'b1;
+            end
+        end
+        else begin
+            out_x_reg <= out_x_reg + 'b1;
+        end
+    end
+end
+
+assign out_sublk_out_of_range = (sublk_y_reg != out_sublk_y_reg);
+
+always_ff @(posedge clk, negedge aresetn) begin
+    if (!aresetn) begin
+        out_sublk_y_reg <= 0;
+    end
+    else if (clken && pipeline_ready) begin
+        if (out_x_last_column && out_line_last_repeat) begin
+            // When the last line output, go to next super block
+            if (!out_sublk_out_of_range) begin
+                out_sublk_y_reg <= nxt_out_sublk_y_reg;
+            end
+        end
+    end
+end
+
+// Output padding control
+sfr_ce #(.WIDTH(4), .LATENCY(BRAM_LATENCY)) 
+out_padding_reg_sfr
+(.*, .data_in(out_padding_reg), .data_out(out_padding_reg_pipe));
+
+always_ff @(posedge clk, negedge aresetn) begin
+    if (!aresetn) begin
+        out_padding_reg <= 'b0001;
+    end
+    else if (clken && pipeline_ready && pixel_out_valid_reg) begin
+        if (out_x_last_column && out_line_last_repeat) begin
+            case (nxt_out_sublk_y_reg)
+                'd0:                      out_padding_reg <= 'b0001;
+                'd1:                      out_padding_reg <= 'b0010;
+                (SUPER_BLOCK_HEIGHT - 2): out_padding_reg <= 'b0100;
+                (SUPER_BLOCK_HEIGHT - 1): out_padding_reg <= 'b1000;
+                default:                  out_padding_reg <= 'b0000;
+            endcase 
+        end
+    end
+end
+
+assign pixel_read_valid = pixel_read_valid_reg;
+
+sfr_ce #(.WIDTH(5), .LATENCY(BRAM_LATENCY)) 
+buffer_active_reg_sfr
+(.*, .data_in(buffer_active_reg), .data_out(buffer_active_reg_pipe));
+
+// Input side controller
+always_ff @(posedge clk, negedge aresetn) begin
+    if (!aresetn) begin
+        buffer_ready <= 'b1;
+        buffer_active_reg <= 'b00001;
+    end
+    else if (clken) begin
+        if (buffer_ready) begin
+            // Buffer is ready, new data can be storage in
+            if (pixel_in_valid) begin // If there is new pixels
+                if (in_x_last_column || pixel_in_end_of_line) begin
+                    // If this is the last pixel of the input line
+
+                    if (!out_sublk_out_of_range) begin
+                        // If there is an output line valid (We have storage at least 2 lines)
+                        buffer_ready <= 'b0;         // Prevent new pixels input
+                    end
+
+                    // Set the actived line to next line
+                    buffer_active_reg <= {buffer_active_reg[3:0], buffer_active_reg[4]};
+                end
+            end
+        end
+        else begin
+            if (out_x_last_column && out_line_last_repeat) begin
+                // When the output is done, we can allow next line input
+                buffer_ready <= 'b1;
+            end
+        end
+    end
+end
+
+// Output side controller
+always_ff @(posedge clk, negedge aresetn) begin
+    if (!aresetn) begin
+        pixel_read_valid_reg <= 'b0;
+    end
+    else if (clken) begin
+        if (!out_sublk_out_of_range) begin
+            pixel_read_valid_reg <= 'b1;
+        end
+    end
+end
+
+// always_ff @(posedge clk, negedge aresetn) begin
+//     if (!aresetn) begin
+//         buffer_ready <= 'b1;
+
+//         buffer_active_reg <= 'b00001;
+
+//         pixel_read_valid_reg <= 'b0;
+
+//         buffer_in_interval <= 'b0;
+
+//         padding_line_reg <= 'b0;
+//     end
+//     else if (clken) begin
+//         if (buffer_ready) begin
+//             if (pixel_in_valid) begin
+//                 // When input pixels write to the last of a line,
+//                 // set ready to low to wait the read side
+//                 if (in_x_last_column || pixel_in_end_of_line) begin
+//                     buffer_ready <= 'b0;
+//                     pixel_read_valid_reg <= 'b1;
+
+//                     // We have accumulated the number of lines inputed,
+//                     // use it to determine we can continuous output or not
+//                     if (padding_line_reg != PADDING_LINE) begin
+//                         padding_line_reg <= padding_line_reg + 1'b1;
+//                     end
+//                 end
+//             end
+//             else begin
+//                 // When buffer ready, but there is not new pixels on the input side, 
+//                 // and if the input stream missed the READY signal, 
+//                 // it must wait for next group of output lines
+//                 if (out_x_last_column) begin
+//                     buffer_ready <= 'b0;
+//                 end
+//             end
+//         end
+//         else if (buffer_in_interval) begin
+//             // When in the interval and the last repeat of output,
+//             // change the pointer to next line
+//             // and reset the buffer ready
+//             if (out_x_last_column && out_line_last_repeat) begin
+//                 buffer_active_reg <= {buffer_active_reg[3:0], buffer_active_reg[4]};
+
+//                 if (pixel_in_valid) begin
+//                     buffer_in_interval <= 'b0;
+//                     buffer_ready <= 'b1;
+//                 end
+//             end
+//         end
+//         else begin
+//             // When the output is the last repeat, 
+//             // determine the next line valid or not.
+//             if (out_x_last_column && out_line_last_repeat) begin
+//                 buffer_active_reg <= {buffer_active_reg[3:0], buffer_active_reg[4]};
+
+//                 if ((padding_line_reg != 0) && pixel_out_valid_reg) begin
+//                     padding_line_reg <= padding_line_reg - 1'b1;
+//                 end
+
+//                 pixel_read_valid_reg <= !out_sublk_out_of_range;
+
+//                 if (sublk_enter_interval) begin
+//                     buffer_in_interval <= 'b1;
+//                     buffer_ready <= 'b0;
+//                 end
+//                 else begin
+//                     buffer_ready <= 'b1;
+//                 end
+//             end
+//         end
+//     end
+// end
+
+// The activate table
+// Activate | BACT_REG | Writing | BWRACT_REG
+// ==========================================
+// 0        | 00001    | 4       | 10000
+// 1        | 00010    | 0       | 00001
+// 2        | 00100    | 1       | 00010
+// 3        | 01000    | 2       | 00100
+// 4        | 10000    | 3       | 01000
+assign buffer_wract_reg = {buffer_active_reg[0], buffer_active_reg[4:1]};
+
+// Buffer output multiplexer
+generate 
+    for (genvar i = 0; i < 4; i++) begin : BUF_OUT_MUX_GEN
+        always_comb begin : BUF_OUT_MUX
+            case (buffer_active_reg_pipe)
+                'b00001: line_out_data[i] = buf_out_data[i];
+                'b00010: line_out_data[i] = buf_out_data[i + 1];
+                'b00100: line_out_data[i] = buf_out_data[(i + 2) > 4 ? i - 3 : i + 2];
+                'b01000: line_out_data[i] = buf_out_data[(i + 3) > 4 ? i - 2 : i + 3];
+                'b10000: line_out_data[i] = buf_out_data[(i + 4) > 4 ? i - 1 : i + 4];
+                default: line_out_data[i] = 'h0;
+            endcase
+        end
+    end
+endgenerate
+
+// Output padding multiplexers
+always_comb begin : OUT_PADDING_LINE0
+    case (out_padding_reg_pipe[1:0])
+        'b00:    pixel_line0 = line_out_data[0];
+        'b01:    pixel_line0 = line_out_data[2];
+        'b10:    pixel_line0 = line_out_data[1];  
+        default: pixel_line0 = 'b0;
+    endcase
+end
+
+always_comb begin : OUT_PADDING_LINE1
+    case (out_padding_reg_pipe[0])
+        'b0:     pixel_line1 = line_out_data[1];
+        'b1:     pixel_line1 = line_out_data[2];
+        default: pixel_line1 = 'b0;
+    endcase
+end
+
+always_comb begin : OUT_PADDING_LINE2
+    case (out_padding_reg_pipe[3])
+        'b0:     pixel_line2 = line_out_data[2];
+        'b1:     pixel_line2 = line_out_data[1];
+        default: pixel_line2 = 'b0;
+    endcase
+end
+
+always_comb begin : OUT_PADDING_LINE3
+    case (out_padding_reg_pipe[3:2])
+        'b00:    pixel_line3 = line_out_data[3];
+        'b01:    pixel_line3 = line_out_data[2];
+        'b10:    pixel_line3 = line_out_data[1];
+        default: pixel_line3 = 'b0;
+    endcase
+end
+
+// Buffers (SDPRAM)
+generate
+    for (genvar i = 0; i < 5; i++) begin : LINE_BUFFER_GEN
+        sdpram #(
+            .MEMORY_SIZE(LINE_MEMORY_SIZE),
+            .ADDR_WIDTH_A(IMAGE_X_CNT_WIDTH),
+            .ADDR_WIDTH_B(IMAGE_X_CNT_WIDTH),
+            .DATA_WIDTH_A(PIXEL_WIDTH),
+            .DATA_WIDTH_B(PIXEL_WIDTH),
+            .CLOCKING_MODE("common_clock")
+        ) line_buffer_ram (
+            .a_clk(clk),
+            .b_clk(clk),
+            .sreset(bram_reset),
+            .a_addr(in_x_reg),
+            .a_data(pixel_in),
+            .a_wren(buffer_wract_reg[i] & allow_write_to_buffer),
+            .b_addr(out_x_reg),
+            .b_data(buf_out_data[i])
+        );
+    end
+endgenerate
+
+endmodule
+

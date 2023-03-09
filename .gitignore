@@ -1,0 +1,19 @@
+# Invalid files
+*.bmp
+*.vcd
+
+# Document
+!doc/latex/bicubic_user_manual.pdf
+
+# Backup files
+*.bak
+
+# Deprecated files
+*.deprecated
+
+# Folders
+vivado
+doc
+constrain
+ip
+

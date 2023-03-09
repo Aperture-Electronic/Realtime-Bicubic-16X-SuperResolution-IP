@@ -1,0 +1,307 @@
+# do simple_test.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Errors: 0, Warnings: 1
+# Model Technology ModelSim SE-64 vmap 2020.4 Lib Mapping Utility 2020.10 Oct 13 2020
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 17:06:37 on Jul 12,2022
+# vlog ../src/bicubic.sv ../src/bicubic_coeff_rom.sv ../src/bicubic_global_settings.sv ../src/bicubic_line_buffer.sv ../src/bicubic_nx_dsp_acc.sv ../src/bicubic_nx_dsp_add.sv ../src/bicubic_nx_pixel_limit.sv ../src/bicubic_nx_simd_mul.sv ../src/bicubic_nx_simd_round.sv ../src/bicubic_pipeline.sv ../src/bicubic_pipeline_controller.sv ../src/bicubic_pixel_out_realign.sv ../src/bicubic_refpx_block_buffer.sv ../src/bicubic_symmertial_mux.sv ../src/dsp_acc4_cin.sv ../src/dsp_acc_cascade_cin.sv ../src/dsp_add3_cin.sv ../src/dsp_add8_cin.sv ../src/dsp_add_cascade_cin.sv ../src/dsp_simd2x_hseg_comp.sv ../src/dsp_simd2x_int24_add.sv ../src/dsp_simd2x_int9xuint8.sv ../src/dsp_simd2x_int9xuint8_cascade_add.sv ../src/dsp_simd4x_int12_add.sv ../src/pixel_limit_output.sv ../src/sdpram_wrapper.sv ../src/sfr.sv ../src/sfr_ce.sv ../src/sfr_ce_sclr.sv ../src/simd2x_round.sv ../src/simd4x_round.sv 
+# -- Compiling module bicubic
+# -- Compiling module bicubic_coeff_rom
+# -- Compiling module bicubic_line_buffer
+# ** Warning: ../src/bicubic_line_buffer.sv(374): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../src/bicubic_line_buffer.sv(375): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../src/bicubic_line_buffer.sv(376): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../src/bicubic_line_buffer.sv(377): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../src/bicubic_line_buffer.sv(378): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# ** Warning: ../src/bicubic_line_buffer.sv(379): (vlog-2583) [SVCHK] - Extra checking for conflicts with always_comb and always_latch variables is done at vopt time.
+# -- Compiling module bicubic_nx_dsp_acc
+# -- Compiling module bicubic_nx_dsp_add
+# -- Compiling module bicubic_nx_pixel_limit
+# -- Compiling module bicubic_nx_simd_mul
+# -- Compiling module bicubic_nx_round
+# -- Compiling module bicubic_pipeline
+# -- Compiling module bicubic_pipeline_controller
+# -- Compiling module bicubic_pixel_out_realign
+# -- Compiling module bicubic_refpx_block_buffer
+# -- Compiling module bicubic_symmertial_mux
+# -- Compiling module dsp_acc4_cin
+# -- Compiling module dsp_acc_cascade_cin
+# -- Compiling module dsp_add3_cin
+# -- Compiling module dsp_add8_cin
+# -- Compiling module dsp_add_cascade_cin
+# -- Compiling module dsp_simd2x_hseg_comp
+# -- Compiling module dsp_simd2x_int24_add
+# -- Compiling module dsp_simd2x_int9xuint8
+# -- Compiling module dsp_simd2x_int9xuint8_cascade_add
+# -- Compiling module dsp_simd4x_int12_add
+# -- Compiling module pixel_limit_output
+# -- Compiling module sdpram
+# -- Compiling module sfr
+# -- Compiling module sfr_ce
+# -- Compiling module sfr_ce_sclr
+# -- Compiling module simd2x_round
+# -- Compiling module simd4x_round
+# 
+# Top level modules:
+# 	bicubic
+# 	bicubic_nx_dsp_acc
+# 	bicubic_nx_round
+# 	dsp_simd2x_hseg_comp
+# 	sfr
+# End time: 17:06:37 on Jul 12,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 6
+# Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 17:06:37 on Jul 12,2022
+# vlog ../sim/tb/bicubic_line_buffer.tb.sv ../sim/tb/bicubic_pipeline_conteroller.tb.sv ../sim/tb/bicubic_pixel_controller.tb.sv ../sim/tb/bicubic_simple.tb.sv ../sim/tb/dsp_acc4_cin.tb.sv ../sim/tb/dsp_add3_cin.tb.sv ../sim/tb/dsp_add8_cin.tb.sv ../sim/tb/dsp_simd2x_int9xuint8.tb.sv ../sim/tb/dsp_simd2x_int9xuint8_cascade_add.tb.sv ../sim/tb/simd2x_round.tb.sv 
+# -- Compiling module bicubic_line_buffer_tb
+# -- Compiling module bicubic_pipeline_controller_tb
+# -- Compiling module bicubic_pixel_controller_tb
+# -- Compiling package bicubic_simple_tb_sv_unit
+# -- Importing package bitmap_processing
+# -- Importing package axi_stream_video_image
+# -- Compiling module bicubic_simple_tb
+# -- Compiling module dsp_acc4_cin_tb
+# -- Compiling module dsp_add3_cin_tb
+# -- Compiling module dsp_add8_cin_tb
+# -- Compiling module dsp_simd2x_int9xuint8_tb
+# -- Compiling module dsp_simd2x_int9xuint8_cascade_add_tb
+# -- Compiling module simd2x_round_tb
+# 
+# Top level modules:
+# 	bicubic_line_buffer_tb
+# 	bicubic_pipeline_controller_tb
+# 	bicubic_pixel_controller_tb
+# 	bicubic_simple_tb
+# 	dsp_acc4_cin_tb
+# 	dsp_add3_cin_tb
+# 	dsp_add8_cin_tb
+# 	dsp_simd2x_int9xuint8_tb
+# 	dsp_simd2x_int9xuint8_cascade_add_tb
+# 	simd2x_round_tb
+# End time: 17:06:37 on Jul 12,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 17:06:37 on Jul 12,2022
+# vlog ../sim/scb/dsp_acc4_cin.scb.sv ../sim/scb/dsp_add3_cin.scb.sv ../sim/scb/dsp_add8_cin.scb.sv ../sim/scb/dsp_simd2x_int9xuint8.scb.sv ../sim/scb/dsp_simd2x_int9xuint8_cascade_add.scb.sv ../sim/scb/simd2x_round.scb.sv 
+# -- Compiling module dsp_acc4_cin_scb
+# -- Compiling module dsp_add3_cin_scb
+# -- Compiling module dsp_add8_cin_scb
+# -- Compiling module dsp_simd2x_int9xuint8_scb
+# -- Compiling module dsp_simd2x_int9xuint8_cascade_add_scb
+# -- Compiling module simd2x_round_scb
+# 
+# Top level modules:
+# 	dsp_acc4_cin_scb
+# 	dsp_add3_cin_scb
+# 	dsp_add8_cin_scb
+# 	dsp_simd2x_int9xuint8_scb
+# 	dsp_simd2x_int9xuint8_cascade_add_scb
+# 	simd2x_round_scb
+# End time: 17:06:37 on Jul 12,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 17:06:37 on Jul 12,2022
+# vlog ../sim/ref/dsp_acc4_cin.ref.sv ../sim/ref/dsp_add3_cin.ref.sv ../sim/ref/dsp_add8_cin.ref.sv ../sim/ref/dsp_simd2x_int9xuint8.ref.sv ../sim/ref/dsp_simd2x_int9xuint8_cascade_add.ref.sv ../sim/ref/simd2x_round.ref.sv 
+# -- Compiling module dsp_acc4_cin_ref
+# -- Compiling module dsp_add3_cin_ref
+# -- Compiling module dsp_add8_cin_ref
+# -- Compiling module dsp_simd2x_int9xuint8_ref
+# -- Compiling module dsp_simd2x_int9xuint8_cascade_add_ref
+# -- Compiling module simd2x_round_ref
+# 
+# Top level modules:
+# 	dsp_acc4_cin_ref
+# 	dsp_add3_cin_ref
+# 	dsp_add8_cin_ref
+# 	dsp_simd2x_int9xuint8_ref
+# 	dsp_simd2x_int9xuint8_cascade_add_ref
+# 	simd2x_round_ref
+# End time: 17:06:37 on Jul 12,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+# Start time: 17:06:37 on Jul 12,2022
+# vlog ../sim/pkg/axi_stream_video_image.sv ../sim/pkg/axi_stream_video_image_example.sv ../sim/pkg/axi_stream_video_image_in_vip.sv ../sim/pkg/axi_stream_video_image_out_vip.sv ../sim/pkg/bitmap_processing.sv ../sim/pkg/bitmap_processing_test.sv 
+# -- Compiling package axi_stream_video_image
+# -- Compiling package axi_stream_video_image_example_sv_unit
+# -- Importing package bitmap_processing
+# -- Importing package axi_stream_video_image
+# -- Compiling module axi_stream_video_image_example
+# -- Compiling package axi_stream_video_image_in_vip_sv_unit
+# -- Compiling module axis_video_img_in_vip
+# ** Warning: ../sim/pkg/axi_stream_video_image_in_vip.sv(88): (vlog-2240) Treating stand-alone use of function 'read' as an implicit VOID cast.
+# -- Compiling package axi_stream_video_image_out_vip_sv_unit
+# -- Compiling module axis_video_img_out_vip
+# -- Compiling package bitmap_processing
+# -- Compiling package bitmap_processing_test_sv_unit
+# -- Compiling module bitmap_processing_test
+# 
+# Top level modules:
+# 	axi_stream_video_image_example
+# 	bitmap_processing_test
+# End time: 17:06:37 on Jul 12,2022, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 1
+# vsim glbl work.bicubic_simple_tb -L secureip -L unisims_ver -L xpm -voptargs="+acc" 
+# Start time: 17:06:38 on Jul 12,2022
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: ../sim/pkg/axi_stream_video_image_in_vip.sv(88): (vopt-2240) Treating stand-alone use of function 'read' as an implicit VOID cast.
+# ** Warning: ../sim/pkg/axi_stream_video_image_in_vip.sv(109): (vopt-2697) LSB 32 of part-select into 'pixel_buffer' is out of bounds.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# //  ModelSim SE-64 2020.4 Oct 13 2020 Linux 5.13.0-48-generic
+# //
+# //  Copyright 1991-2020 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading work.glbl(fast)
+# Loading sv_std.std
+# Loading work.axi_stream_video_image(fast)
+# Loading work.bitmap_processing(fast)
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read File: ../sim/pkg/bitmap_processing.sv Line: 107
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read File: ../sim/pkg/bitmap_processing.sv Line: 114
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fseek'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read File: ../sim/pkg/bitmap_processing.sv Line: 115
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read File: ../sim/pkg/bitmap_processing.sv Line: 116
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fseek'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read File: ../sim/pkg/bitmap_processing.sv Line: 139
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read/#anonblk#25553959#141#4# File: ../sim/pkg/bitmap_processing.sv Line: 143
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::read/#anonblk#25553959#141#4#/#anonblk#25553959#146#4# File: ../sim/pkg/bitmap_processing.sv Line: 147
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fseek'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::readBitmapInfoHead File: ../sim/pkg/bitmap_processing.sv Line: 206
+# ** Warning: (vsim-PLI-3691) Expected a system task, not a system function '$fread'.
+#    Time: 0 ns  Iteration: 0  Region: /bitmap_processing::Bitmap::readBitmapInfoHead File: ../sim/pkg/bitmap_processing.sv Line: 207
+# Loading work.bicubic_simple_tb_sv_unit(fast)
+# Loading work.bicubic_simple_tb(fast)
+# Loading work.bicubic(fast)
+# Loading work.bicubic_line_buffer(fast)
+# Loading work.sfr_ce_sclr(fast)
+# Loading work.sdpram(fast)
+# Loading xpm.xpm_memory_sdpram(fast)
+# Loading xpm.xpm_memory_base(fast)
+# Loading work.bicubic_pipeline_controller(fast)
+# Loading work.sfr_ce_sclr(fast__1)
+# Loading work.sfr_ce_sclr(fast__2)
+# Loading work.sfr_ce_sclr(fast__3)
+# Loading work.bicubic_pipeline(fast)
+# Loading work.bicubic_refpx_block_buffer(fast)
+# Loading work.bicubic_symmertial_mux(fast)
+# Loading work.bicubic_coeff_rom(fast)
+# Loading work.bicubic_nx_simd_mul(fast)
+# Loading work.dsp_simd2x_int9xuint8_cascade_add(fast)
+# Loading work.dsp_simd2x_int9xuint8(fast)
+# Loading unisims_ver.DSP48E2(fast)
+# Loading work.sfr_ce(fast)
+# Loading work.sfr_ce(fast__1)
+# Loading work.dsp_simd2x_int9xuint8(fast__1)
+# Loading work.bicubic_nx_dsp_add(fast)
+# Loading work.dsp_add8_cin(fast)
+# Loading work.sfr_ce(fast__2)
+# Loading work.sfr_ce(fast__3)
+# Loading work.sfr_ce(fast__4)
+# Loading work.dsp_add3_cin(fast)
+# Loading unisims_ver.DSP48E2(fast__1)
+# Loading work.dsp_add_cascade_cin(fast)
+# Loading unisims_ver.DSP48E2(fast__2)
+# Loading work.dsp_add3_cin(fast__1)
+# Loading unisims_ver.DSP48E2(fast__3)
+# Loading work.simd4x_round(fast)
+# Loading work.dsp_simd4x_int12_add(fast)
+# Loading unisims_ver.DSP48E2(fast__4)
+# Loading work.bicubic_nx_pixel_limit(fast)
+# Loading work.pixel_limit_output(fast)
+# Loading work.bicubic_pixel_out_realign(fast)
+# Loading work.axi_stream_video_image_in_vip_sv_unit(fast)
+# Loading work.axis_video_img_in_vip(fast)
+# Loading work.axi_stream_video_image_out_vip_sv_unit(fast)
+# Loading work.axis_video_img_out_vip(fast)
+# bicubic_line_buffer Testbench
+# Reseting...
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_R.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_G.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[0].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[1].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[2].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[3].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# ** Info: [XPM_MEMORY 20-1] MEMORY_PRIMITIVE (0) instructs Vivado Synthesis to choose the memory primitive type. Depending on their values, other XPM_MEMORY parameters may preclude the choice of certain memory primitive types. Review XPM_MEMORY documentation and parameter values to understand any limitations, or set MEMORY_PRIMITIVE to a different value. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 490
+# ** Info: [XPM_MEMORY 20-2] MEMORY_INIT_FILE (none), MEMORY_INIT_PARAM together specify no memory initialization. Initial memory contents will be all 0's. bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc 48
+#    Time: 1 ps  Scope: bicubic_simple_tb.DUV_B.bicubic_lbf.LINE_BUFFER_GEN[4].line_buffer_ram.xpm_sdpram_inst.xpm_memory_base_inst.config_drc File: /home/onodera/Vitis/Vivado/2021.1/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv Line: 492
+# Running...
+# DSP48E & BRAM slice reset released @              175000.
+# Start read a bitmap (         16 x           8).
+# Created a bitmap (         64 x          32).
+# Get a valid frame @             1225000
+# A frame of bitmap sent.
+# Sent
+# A frame of bitmap sent.
+# Sent
+# Writing a bitmap (         64 x          32) to file out.bmp.
+# Bitmap wrote.
+# Received
+# ** Note: $finish    : ../sim/tb/bicubic_simple.tb.sv(88)
+#    Time: 6645 ns  Iteration: 1  Region: /bicubic_simple_tb/out_vip/ReceiveAndSaveBitmap
+# End time: 17:06:43 on Jul 12,2022, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 11

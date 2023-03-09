@@ -1,0 +1,152 @@
+always_ff @(posedge clk) begin : COEFF_DSP_0
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_0 <= 'b000000010_111101000;
+		end
+		else begin
+			coeff_dsp_0 <= 'b111111101_000000000;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_0 <= 'b000000100_111101101;
+		end
+		else begin
+			coeff_dsp_0 <= 'b111110101_000000010;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_1
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_1 <= 'b000000100_111011100;
+		end
+		else begin
+			coeff_dsp_1 <= 'b111111011_000000001;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_1 <= 'b000000101_111100011;
+		end
+		else begin
+			coeff_dsp_1 <= 'b111101111_000000011;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_2
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_2 <= 'b000000010_111101010;
+		end
+		else begin
+			coeff_dsp_2 <= 'b111111101_000000000;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_2 <= 'b000000011_111101111;
+		end
+		else begin
+			coeff_dsp_2 <= 'b111110110_000000010;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_3
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_3 <= 'b000000000_111111101;
+		end
+		else begin
+			coeff_dsp_3 <= 'b000000000_000000000;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_3 <= 'b000000001_111111101;
+		end
+		else begin
+			coeff_dsp_3 <= 'b111111110_000000000;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_4
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_4 <= 'b111101000_011110001;
+		end
+		else begin
+			coeff_dsp_4 <= 'b000100010_111111101;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_4 <= 'b111011100_011000000;
+		end
+		else begin
+			coeff_dsp_4 <= 'b001110011_111101010;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_5
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_5 <= 'b111101101_011000000;
+		end
+		else begin
+			coeff_dsp_5 <= 'b000011011_111111101;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_5 <= 'b111100011_010011000;
+		end
+		else begin
+			coeff_dsp_5 <= 'b001011011_111101111;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_6
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_6 <= 'b111110101_001110011;
+		end
+		else begin
+			coeff_dsp_6 <= 'b000010000_111111110;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_6 <= 'b111101111_001011011;
+		end
+		else begin
+			coeff_dsp_6 <= 'b000110111_111110110;
+		end
+	end
+end
+
+always_ff @(posedge clk) begin : COEFF_DSP_7
+	if (!line) begin
+		if (!phase) begin
+			coeff_dsp_7 <= 'b111111101_000100010;
+		end
+		else begin
+			coeff_dsp_7 <= 'b000000101_000000000;
+		end
+	end
+	else begin
+		if (!phase) begin
+			coeff_dsp_7 <= 'b111111011_000011011;
+		end
+		else begin
+			coeff_dsp_7 <= 'b000010000_111111101;
+		end
+	end
+end
+
