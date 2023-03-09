@@ -12,10 +12,10 @@ transcript
 
 # Folders
 vivado
-doc
+doc/latex
 constrain
 ip
 modelsim/work
 
 # Document
-!doc/latex/bicubic_user_manual.pdf
+!doc/bicubic_user_manual.pdf
