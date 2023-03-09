@@ -21,7 +21,7 @@ Inc. UG934).
 * Macro switches to using different implementations (DSP Macro/Verilog Inferring)
 
 ## File Directory Structure
-Please see the Documentation at doc/latex/bicubic_user_manual.pdf, Section 7.1
+Please see the Documentation at doc/bicubic_user_manual.pdf, Section 7.1
 
 ## Licensing and Open Source Information
 The Real-time Video Bicubic Super-resolution IP is a fully open source IP core, with all source code
