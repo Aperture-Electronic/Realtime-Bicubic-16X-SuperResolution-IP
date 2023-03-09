@@ -2,9 +2,6 @@
 *.bmp
 *.vcd
 
-# Document
-!doc/latex/bicubic_user_manual.pdf
-
 # Backup files
 *.bak
 
@@ -20,3 +17,5 @@ constrain
 ip
 modelsim/work
 
+# Document
+!doc/latex/bicubic_user_manual.pdf
