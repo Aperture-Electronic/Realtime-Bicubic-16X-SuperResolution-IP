@@ -1,0 +1,3 @@
+[submodule "sim/pkg"]
+	path = sim/pkg
+	url = git@github.com:Aperture-Electronic/SystemVerilog-Bitmap-Library-AXI-Image-VIP.git
